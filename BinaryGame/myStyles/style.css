@@ -10,7 +10,7 @@ position:absolute;
 text-align:center;
 width:100%;
 top:50%;
-margin-top:-280px;
+margin-top:-250px;
 }
 #refresh
 {
@@ -39,7 +39,7 @@ margin-top:-280px;
 	position:absolute;
 	left:50%;
 	top:50%;
-	margin-top:-210px;  
+	margin-top:-180px;  
 	/* (5*8)+(70*4)=320 */
 	margin-left:-160px;
 	width:320px;
