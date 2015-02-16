@@ -88,7 +88,21 @@ function init()
 		}
 	}
 }
-
+function check()
+{
+	if(count==16||count==0)
+				{
+				
+					var score=localStorage.getItem("binaryGameScore");
+					if(score==null)
+					{
+						
+						alert(score);
+					}
+					
+					
+				}
+}
 function rotator(element)
 {
 	if(!element.style.webkitTransform||element.style.webkitTransform=="rotateY(0deg)")
@@ -106,9 +120,7 @@ function rotator(element)
 					count+=1;
 					$(element).css("background-color",oneColor);
 				}
-				if(count==16||count==0)
-				{
-					alert("game end");
-				}
+				check();
+				
 }
 
