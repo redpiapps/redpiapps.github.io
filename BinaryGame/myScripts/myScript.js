@@ -5,12 +5,27 @@ var zeroHoverColor="#36C4EF";
 var count=0;
 var moves;
 var movesVal=0;
+var tiles;
 function init()
 {
+	$("#title").click(function(){refresh();
+	
+	});
+	
+	$("#title").hover(function(){$(this).css("cursor","pointer");
+	
+	});
 	moves=$("#movesVal")[0];
-	var tiles=document.getElementsByTagName("td");
+	 tiles=document.getElementsByTagName("td");
 	
-	
+	if(typeof(Storage) !== "undefined") {
+
+	if(localStorage.getItem("binaryGameScore")!=null)
+	{
+		$("#bestVal").html(localStorage.getItem("binaryGameScore"));
+
+	}
+	}
 
 	var val=0;
 	for(var i=0;i<tiles.length;++i)
@@ -20,7 +35,7 @@ function init()
 
 		$("#"+tiles[i].id).hover(function(){
 		
-
+		$(this).css("cursor","pointer");
 		if($(this).html()=="0")
 		{		
 			$(this).css("background-color",zeroHoverColor);
@@ -68,11 +83,11 @@ function init()
 				if(rightPos<16&&rightPos!=4&&rightPos!=8&&rightPos!=12)
 					rotator($("#tile"+rightPos)[0]);
 
-				
+				check();
 			
 			
 		});
-		//val=0;
+		//val=1;
 		if(val==0)
 		{
 		
@@ -87,19 +102,62 @@ function init()
 			val=0;
 		}
 	}
+	
+}
+function refresh()
+{
+count=0;
+		movesVal=0;
+				val=0;
+
+	for(var i=0;i<tiles.length;++i)
+	{
+		
+		if(val==0)
+		{
+		
+			tiles[i].innerHTML="0";
+			tiles[i].style.backgroundColor=zeroColor;
+			val=1;
+		}else
+		{
+			count+=1;
+			tiles[i].innerHTML="1";
+			tiles[i].style.backgroundColor=oneColor;
+			val=0;
+		}
+		
+	}
+
 }
 function check()
 {
 	if(count==16||count==0)
 				{
 				
+					if(typeof(Storage) !== "undefined") {
+
 					var score=localStorage.getItem("binaryGameScore");
 					if(score==null)
 					{
 						
-						alert(score);
+						localStorage.setItem("binaryGameScore",movesVal);
 					}
-					
+					else
+					{
+						if(movesVal<parseInt(score))
+						{
+							localStorage.setItem("binaryGameScore",movesVal);
+																		$("#bestVal").html(movesVal);
+
+
+						}
+
+						
+					}
+					}
+					alert("Congrats.You finished the puzzle in "+movesVal+" moves.Click Ok to play again.");
+					refresh();
 					
 				}
 }
@@ -120,7 +178,7 @@ function rotator(element)
 					count+=1;
 					$(element).css("background-color",oneColor);
 				}
-				check();
+				
 				
 }
 
