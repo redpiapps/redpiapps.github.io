@@ -109,7 +109,7 @@ function refresh()
 count=0;
 		movesVal=0;
 				val=0;
-
+	$("#movesVal").html("0");
 	for(var i=0;i<tiles.length;++i)
 	{
 		
